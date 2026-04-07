@@ -41,6 +41,13 @@ void tampilB(int matriks[][tungs], int i){
     printf("\n"); // Ganti baris setelah satu baris kolom selesai di-print
     tampilB(matriks, i+1);
 }
+//penjelasan algoritmanya (i=0)
+//baris ganjil = matriks 1 (pakai modulo %2 =! 0 untuk ganjil)
+//baris genap = matriks 2 (pakai modulo %2 == 0 untuk genap)
+//bagaimana cara menyesuaikan 
+//i=0 -> 0/2=0 ->baris 0 matriks 1
+//i=1 -> 1/2=0.5=0 ->baris 0 matriks 2
+//seterusnya....
 
 //gabung selang-seling(GSS)
 
@@ -50,7 +57,7 @@ void GSS_K(int i, int j){
     
     // i/2 digunakan agar index baris asli (0-1) sinkron dengan index baris output (0-3)
     if(i % 2 == 0) // jika baris output genap, ambil dari  M1
-        printf("%d ", matriks1[i/2][j]);
+        printf("%d ", matriks1[i/2][j]); 
     else           // jika baris output ganjil, ambil dari  M2
         printf("%d ", matriks2[i/2][j]);
 
@@ -58,7 +65,7 @@ void GSS_K(int i, int j){
 }
 
 void GSS(int i){
-    if(i >= b*2) return; // Output jadi double baris (b*2)
+    if(i >= b*2) return; //disini b*2 karena total baris akan x2 dari jumlah awal, karena gabungan dari M1 dan M2
     GSS_K(i, 0);
     printf("\n");
     GSS(i+1);
@@ -87,7 +94,7 @@ void GC_K(int i, int j){
 }
 
 void GC(int i) {
-    if(i >= b*2) return;
+    if(i >= b*2) return; //disini b*2 karena total baris akan x2 dari jumlah awal, karena gabungan dari M1 dan M2 
     GC_K(i, 0);
     printf("\n");
     GC(i+1);
