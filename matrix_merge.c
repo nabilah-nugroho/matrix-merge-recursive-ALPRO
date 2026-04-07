@@ -1,13 +1,14 @@
 #include <stdio.h>
 
-#define tungguDulu 10
+#define tungguDulu 10 
 int n; //kolom
 int b = 2; //baris
 
-int matriks1[2][tungguDulu];
+int matriks1[2][tungguDulu]; //baris sudah pasti 2, kolom menyesuaikan dengan input user
 int matriks2[2][tungguDulu];
 
 
+//user input
 void inputUser(){
     printf("masukkan kolom yang diinginkan: "); scanf("%d", &n);
     printf("\n\n");
@@ -29,7 +30,8 @@ void inputUser(){
     }
 }
 
-void tampil(int matriks[][tungguDulu], int baris, int kolom, char nama[]){
+//supaya tidak membuat fungsi loop berulang kali untuk menampilkan matriks
+void tampil(int matriks[][tungguDulu], int baris, int kolom, char nama[]){ 
     printf("%s\n", nama);
     for (int i = 0; i < baris; i++){
         for(int j = 0; j < kolom; j++){
@@ -41,40 +43,51 @@ void tampil(int matriks[][tungguDulu], int baris, int kolom, char nama[]){
 
 void GSS() {
 printf("hasil gabung selang-seling: \n");
-for (int i = 0; i < b*2; i++){
-    if (i % 2 == 0){
+for (int i = 0; i < b*2; i++){ //disini b*2 karena total baris akan x2 dari jumlah awal, karena gabungan dari M1 dan M2
+    if (i % 2 == 0){ //kondisi baris genap (i/baris dimulai dari 0), karena output diminta untuk baris ganjil menampilkan matriks 1
         for (int j = 0; j < n; j++){
-            printf("%d ", matriks1[i/2][j]);
+            printf("%d ", matriks1[i/2][j]); // i/2 karena agar dapat nyeseuaiin saat genap atau i=0 yg muncul baris 1 matriks 1, pas ganjil  atau i = 1 yang muncul baris 1 matriks 2, dan seterusnya.
             }
     printf("\n");
         }
 
-    else {
+    else { //kondisi baris ganjil, pada baris ganjil dia menampilkan M2
         for (int j = 0; j < n; j++){
             printf("%d ", matriks2[i/2][j]);
             }
     printf("\n");
         }
     }
+//penjelasan algoritmanya (i=0)
+//baris ganjil = matriks 1 (pakai modulo %2 =! 0 untuk ganjil)
+//baris genap = matriks 2 (pakai modulo %2 == 0 untuk genap)
+//bagaimana cara menyesuaikan 
+//i=0 -> 0/2=0 ->baris 0 matriks 1
+//i=1 -> 1/2=0.5=0 ->baris 0 matriks 2
+//seterusnya....
 
 }
 
 void GC() {
 printf("hasil gabung campur: \n");
-    for(int i = 0; i < b*2; i++){
-        for(int j = 0; j < n; j++){
+    for(int i = 0; i < b*2; i++){ //baris total menjadi double
+        for(int j = 0; j < n; j++){ //loop kolom
             if(i%2==0){
-                if(j%2==0)
+                if(j%2==0) //kolom genap
+                //ambil m1 baris normal (i/2)
                     printf("%d ", matriks1[i/2][j]);
                 
                 else
-                    printf("%d ", matriks2[(i/2)+1][j]);
+                //ambil m2 lompat baris dibawahnya (+1)
+                    printf("%d ", matriks2[((i/2)+1)%b][j]);
                 }
-            else {
-                if(j%2==0)
+            else { //baris ganjil
+                if(j%2==0) //kolom genap
+                //ambil m2 baris normal (i/2)
                     printf("%d ", matriks2[i/2][j]);
-                else
-                    printf("%d ", matriks1[(i/2)+1][j]);
+                else //kolom ganjil
+                //ambil m1 lompat baris bawahnya (+1)
+                    printf("%d ", matriks1[((i/2)+1)%b][j]);
 
                 }
         }
