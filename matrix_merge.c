@@ -29,9 +29,19 @@ void inputUser(){
     }
 }
 
-void GSS() {
+void tampil(int matriks[][tungguDulu], int baris, int kolom, char nama[]){
+    printf("%s\n", nama);
+    for (int i = 0; i < baris; i++){
+        for(int j = 0; j < kolom; j++){
+            printf("%d ", matriks[i][j]);
+        }
+        printf("\n");
+    }
+}
 
-for (int i = 0; i < b; i++){
+void GSS() {
+printf("hasil gabung selang-seling: \n");
+for (int i = 0; i < b*2; i++){
     if (i % 2 == 0){
         for (int j = 0; j < n; j++){
             printf("%d ", matriks1[i/2][j]);
@@ -49,8 +59,39 @@ for (int i = 0; i < b; i++){
 
 }
 
+void GC() {
+printf("hasil gabung campur: \n");
+    for(int i = 0; i < b*2; i++){
+        for(int j = 0; j < n; j++){
+            if(i%2==0){
+                if(j%2==0)
+                    printf("%d ", matriks1[i/2][j]);
+                
+                else
+                    printf("%d ", matriks2[(i/2)+1][j]);
+                }
+            else {
+                if(j%2==0)
+                    printf("%d ", matriks2[i/2][j]);
+                else
+                    printf("%d ", matriks1[(i/2)+1][j]);
+
+                }
+        }
+        printf("\n");
+
+    }
+}
+
 int main() {
     inputUser();
+    printf("\n");
+    tampil(matriks1, b, n, "matriks 1");
+    printf("\n");
+    tampil(matriks2, b, n, "matriks 2");
+    printf("\n");
     GSS();
+    printf("\n");
+    GC();
     return 0; 
 }
